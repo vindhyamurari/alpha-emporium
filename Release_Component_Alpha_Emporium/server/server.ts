@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import env from "dotenv";
 import express from "express";
-import { router } from "./src/routes/bookRoutes";
+import { bookRouter } from "./src/routes/bookRoutes";
+import { userRouter } from "./src/routes/userRoutes";
 
 const configureEnvironment = () => {
   env.config();
@@ -33,7 +34,8 @@ const startServer = async () => {
   server.on("error", (error: any) =>
     console.log("server error : ", error.message)
   );
-  app.use("/books", router);
+  app.use("/api/books", bookRouter);
+  app.use("/api/user", userRouter);
 };
 
 startServer()

@@ -1,14 +1,15 @@
 import express from "express";
 import {
-  getAllBooks,
-  deleteBook,
+  getBooks,
   addNewBook,
+  deleteBook,
 } from "../controllers/bookController";
+import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth";
 
-export const router = express.Router();
+export const bookRouter = express.Router();
 
-router.get("/", getAllBooks);
+bookRouter.get("/", getBooks);
 
-router.post("/", addNewBook);
+bookRouter.post("/", addNewBook);
 
-router.delete("/:id", deleteBook);
+bookRouter.delete("/:id", deleteBook);
