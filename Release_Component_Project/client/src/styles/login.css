@@ -1,0 +1,23 @@
+.container{
+    margin-top: 3.5vw;
+    margin-left: 150vw;
+    margin-right: auto;
+}
+.login-container{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    width: 70vw;
+    /* border-radius: 1vw;
+    box-shadow:0 0 2px 2px #800020; */
+}
+.login-image{
+    max-width:30vw;
+    height:30vw;
+}
+.login-form{
+    /* background-color: white; */
+    height:37vw;
+}
+.logi-from-inner{
+    margin: 8.5vw 0vw 0vw 7vw;
+}

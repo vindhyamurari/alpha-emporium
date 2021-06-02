@@ -1,0 +1,61 @@
+body{
+    color:#800020;
+    background-color:white;
+}
+.navbar-brand-titleOne {
+    color: #800020;
+    margin-left: 0.5vw;
+    margin-right: 30vw;
+    font-size: 1.8vw;
+  }
+  .mybar{
+    margin-left: 20vw;
+  }
+  .nav-link{
+      color:#800020;
+  }
+  .nav-item-new{
+    margin: 2vw 0vw 2vw 0vw;
+    width:10vw;
+    color:#800020;
+  } 
+  .my-nav-bar{
+      padding: 0vw;
+      background-color: white;
+  }
+  .select-options{
+      margin:0vw;
+      padding:0vw;
+      height:2.5vw;
+  }
+  .linkOption{
+    background-color:white;
+    font-weight: bolder;
+    font-size:larger;
+    color:#800020;
+    width:20vw;
+    margin:3vw 0vw 0vw 5vw;
+    text-align: center;
+  }
+  .linkOption:hover{
+    background-color: white;
+  }
+  .linkOption-one{
+    background-color:white;
+    font-weight: bold;
+    font-size:larger;
+    color:#800020;
+    width:20vw;
+    margin:2vw 0vw 0vw 5vw;
+    margin-top: 12vw;
+    text-align: center;
+  }
+  .search-from-input{
+      color:#800020;
+      height: 2vw;
+      display:inline-block;
+  }
+  .search-form-btn{
+    height:2vw;
+    padding: 0vw;
+  }
