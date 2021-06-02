@@ -4,42 +4,98 @@ const bookSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Please enter Book title"],
+      // trim: true,
+      maxLength: [100, "Book title cannot exceed 100 characters"],
     },
     author: {
       type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
+      required: [true, "Please enter Book Author"],
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, "Please enter Book price"],
+      maxLength: [5, "Book price cannot exceed 5 characters"],
+      default: 0.0,
     },
-    tags: {
-      type: Array,
-      required: true,
+    description: {
+      type: String,
+      required: [true, "Please enter Book description"],
+    },
+    ratings: {
+      type: Number,
+      default: 0,
     },
     cover: {
       type: String,
       required: true,
     },
+    category: {
+      type: Array,
+      required: [true, "Please select category for this Book"],
+      // enum: {
+      //   values: [
+      //     "Devotional",
+      //     "Mythological",
+      //     "Romantic",
+      //     "Horror",
+      //     "Epic",
+      //     "Indian",
+      //     "Historic",
+      //     "Fantasy",
+      //     "Fiction",
+      //     "Love",
+      //     "Classic",
+      //     "Adventure",
+      //     "Suspence",
+      //     "Thriller",
+      //     "Young-Adult",
+      //   ],
+      //   message: "Please select correct category for Book",
+      // },
+    },
     stock: {
       type: Number,
-      required: true,
+      required: [true, "Please enter Book stock"],
+      maxLength: [5, "Book title cannot exceed 5 characters"],
+      default: 0,
     },
-    discount: {
-      type: String,
-      required: false,
+    numOfReviews: {
+      type: Number,
+      default: 0,
     },
-    reviews : {
-      type :Array,
-      required:false,
-    }
+    reviews: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "user",
+          // required: true,
+        },
+        title: {
+          type: String,
+          // required: true,
+        },
+        rating: {
+          type: Number,
+          // required: true,
+        },
+        comment: {
+          type: String,
+          // required: true,
+        },
+      },
+    ],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      // required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  { collection: "books" }
+  { collection: "books", timestamps: true }
 );
 
-export = mongoose.model("book", bookSchema);
+export = mongoose.model("Book", bookSchema);
