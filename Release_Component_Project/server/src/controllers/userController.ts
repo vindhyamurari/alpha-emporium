@@ -4,35 +4,44 @@ import bcrypt from "bcryptjs";
 
 export const registerUser = async (req: any, res: any) => {
   try {
-    const { name, email, phoneNumber, password, role } = req.body;
+    const { name, email, phoneNumber, password} = req.body;
     let user: any;
-    user = await User.create({
-      name,
-      email,
-      phoneNumber,
-      password,
-      role,
-    });
-    bcrypt.genSalt(10, (err: any, salt: any) => {
-      bcrypt.hash(user.password, salt, (err: any, hash: any) => {
-        if (err) {
-          return res
-            .status(404)
-            .send({ message: "Error while hashing password" });
-        }
-        user.password = hash;
-        user.save().then((user: any) => {
-          res.send(user);
+    try{
+      user = await User.create({
+        name,
+        email,
+        phoneNumber,
+        password
+      });
+      bcrypt.genSalt(10, (err: any, salt: any) => {
+        bcrypt.hash(user.password, salt, (err: any, hash: any) => {
+          if (err) {
+            return res
+              .status(404)
+              .send({ message: "Error while hashing password" });
+          }
+          user.password = hash;
+          user.save().then((user: any) => {
+            res.send(user);
+          });
         });
       });
-    });
-    res
-      .status(200)
-      .json({ success: true, message: "Registration successful", user });
+      res
+        .status(200)
+        .json({ success: true, message: "Registration successful", user });
+    }
+    catch(err){
+      res.status(404).send({
+        success: false,
+        message: err.message
+      });
+    }
+    
   } catch (err) {
+    console.log(`from register err.message`, err.message)
     res.status(404).send({
       success: false,
-      message: "Error in Register User",
+      message: "Error in Register User"
     });
   }
 };

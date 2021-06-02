@@ -43,7 +43,7 @@ export default function Login({}: Props): ReactElement {
   const [modalMessage, setmodalMessage] = useState("");
 
   const [login, setlogin] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -103,8 +103,8 @@ export default function Login({}: Props): ReactElement {
                   <div>
                     <TextField
                       label="Username"
-                      placeholder="Enter username "
-                      name="username"
+                      placeholder="Enter email "
+                      name="email"
                       autoComplete="off"
                       type="text"
                       required

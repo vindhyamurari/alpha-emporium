@@ -1,13 +1,14 @@
 import * as Constants from './constants';
 
 const initalstate={
-    loggedInUser:{}
+    loggedInUser:{},
+    token:''
 }
 
 const userReducer =(state:any=initalstate,action:any)=>{
     switch(action.type){
         case Constants.USER_LOGIN:
-            return {...state,loggedInUser:action.payload}
+            return {...state,token:action.payload.token,loggedInUser:action.payload.user}
         case Constants.USER_LOGOUT:
             return {...state,loggedInUser:{}}
         default:

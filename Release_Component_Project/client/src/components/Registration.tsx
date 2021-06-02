@@ -15,7 +15,6 @@ import '../styles/register.css'
 import { pink } from "@material-ui/core/colors";
 import {useSelector} from 'react-redux';
 import UserServices from '../Services/user-services';
-import { error } from "console";
 
 interface Props {}
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,7 +51,7 @@ export default function Register({}: Props): ReactElement {
     name:"",
     email: "",
     phone:"",
-    avatar:"",
+    // avatar:"",
     password: "",
     confirmpassword: "",
   });
@@ -73,12 +72,14 @@ export default function Register({}: Props): ReactElement {
 
   const submitFormDetails = (e: any) => {
     e.preventDefault();
-    let {name,email,avatar,phone,password}=register;
-    phone=`+91${phone}`;
-    const userDetails={name,email,avatar,phone,password}
+    let {name,email,phone,password}=register;
+    let phoneNumber=`+91${phone}`;
+    const userDetails={name,email,phoneNumber,password}
+    console.log(`userDetails`, userDetails)
    apiCall.registerUser(userDetails)
    .then((returnValue)=>{console.log('user Registered',returnValue);history.push('/')})
-   .catch((error)=>{setModalShow(true);
+   .catch((error)=>{
+    setModalShow(true);
     if (error.response) {
       setmodalMessage(error.response.data.message);
       return;
@@ -88,6 +89,15 @@ export default function Register({}: Props): ReactElement {
    
   };
   return (
+    <div>
+    <MyVerticallyCenteredModal
+      header="Failed"
+      body={modalMessage}
+      show={modalShow}
+      onHide={() => {
+        setModalShow(false);
+      }}
+    />
       <div className="container" style={{marginLeft:'15vw'}}>
         <div className="row registration-container">
           <div className="col registration-form"><div >
@@ -137,7 +147,7 @@ export default function Register({}: Props): ReactElement {
             onChange={inputEvent}
             className={classes.myinput}
           /></div>
-          <div>
+          {/* <div>
          <TextField
             label="Avatar"
             placeholder="Enter Profile Image "
@@ -146,7 +156,7 @@ export default function Register({}: Props): ReactElement {
             type="text"
             onChange={inputEvent}
             className={classes.myinput}
-          /></div>
+          /></div> */}
           <div>
         <TextField
             label="Password"
@@ -188,6 +198,7 @@ export default function Register({}: Props): ReactElement {
       </form>
           </div>
         </div>
+      </div>
       </div>
   );
 }

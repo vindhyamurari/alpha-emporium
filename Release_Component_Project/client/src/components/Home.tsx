@@ -9,7 +9,7 @@ export default function Home({}: Props): ReactElement {
     const user=useSelector((state:any)=>state.user);
     return (
         <div>
-            <h3>{user.loggedInUser}</h3>
+            <h3>{user.token}</h3>
         </div>
     )
 }

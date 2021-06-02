@@ -3,14 +3,12 @@ import Header from "./components/Header";
 import Login from "./components/login";
 import Register from "./components/Registration";
 import './styles/Header.css'
-import {Provider} from 'react-redux'
-import store from './Reducers/redux-store'
+
 import Home from './components/Home'
 
 function App() {
   return (
     <>
-    <Provider store={store}> 
       <Router>
         <Header></Header>
         <Switch>
@@ -19,7 +17,6 @@ function App() {
           <Route exact path="/register"><Register></Register></Route>
         </Switch>
       </Router>
-      </Provider>
     </>
   );
 }
