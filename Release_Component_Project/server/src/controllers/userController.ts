@@ -4,14 +4,14 @@ import bcrypt from "bcryptjs";
 
 export const registerUser = async (req: any, res: any) => {
   try {
-    const { name, email, phoneNumber, password} = req.body;
+    const { name, email, phoneNumber, password } = req.body;
     let user: any;
-    try{
+    try {
       user = await User.create({
         name,
         email,
         phoneNumber,
-        password
+        password,
       });
       bcrypt.genSalt(10, (err: any, salt: any) => {
         bcrypt.hash(user.password, salt, (err: any, hash: any) => {
@@ -29,19 +29,17 @@ export const registerUser = async (req: any, res: any) => {
       res
         .status(200)
         .json({ success: true, message: "Registration successful", user });
-    }
-    catch(err){
+    } catch (err) {
       res.status(404).send({
         success: false,
-        message: err.message
+        message: err.message,
       });
     }
-    
   } catch (err) {
-    console.log(`from register err.message`, err.message)
+    console.log(`from register err.message`, err.message);
     res.status(404).send({
       success: false,
-      message: "Error in Register User"
+      message: "Error in Register User",
     });
   }
 };
@@ -74,7 +72,7 @@ export const loginUser = async (req: any, res: any) => {
         jwt.sign(
           { id: user._id },
           `${process.env.jwtSecret}`,
-          { expiresIn: 36000000 },
+          { expiresIn: "1d" },
           (err: any, token: any) => {
             if (err) {
               return res

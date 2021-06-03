@@ -5,7 +5,6 @@ const bookSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please enter Book title"],
-      // trim: true,
       maxLength: [100, "Book title cannot exceed 100 characters"],
     },
     author: {
@@ -15,12 +14,7 @@ const bookSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: [true, "Please enter Book price"],
-      maxLength: [5, "Book price cannot exceed 5 characters"],
       default: 0.0,
-    },
-    description: {
-      type: String,
-      required: [true, "Please enter Book description"],
     },
     ratings: {
       type: Number,
@@ -30,29 +24,13 @@ const bookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
+    pages: {
+      type: String,
+      required: true,
+    },
+    tags: {
       type: Array,
-      required: [true, "Please select category for this Book"],
-      // enum: {
-      //   values: [
-      //     "Devotional",
-      //     "Mythological",
-      //     "Romantic",
-      //     "Horror",
-      //     "Epic",
-      //     "Indian",
-      //     "Historic",
-      //     "Fantasy",
-      //     "Fiction",
-      //     "Love",
-      //     "Classic",
-      //     "Adventure",
-      //     "Suspence",
-      //     "Thriller",
-      //     "Young-Adult",
-      //   ],
-      //   message: "Please select correct category for Book",
-      // },
+      required: [true, "Please enter the tags"],
     },
     stock: {
       type: Number,
@@ -60,7 +38,11 @@ const bookSchema = new mongoose.Schema(
       maxLength: [5, "Book title cannot exceed 5 characters"],
       default: 0,
     },
-    numOfReviews: {
+    votes: {
+      type: Number,
+      default: 0,
+    },
+    discount: {
       type: Number,
       default: 0,
     },
@@ -85,11 +67,6 @@ const bookSchema = new mongoose.Schema(
         },
       },
     ],
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
-      // required: true,
-    },
     createdAt: {
       type: Date,
       default: Date.now,
