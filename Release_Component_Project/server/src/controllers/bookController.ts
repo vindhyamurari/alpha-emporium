@@ -1,4 +1,5 @@
 import Book from "../models/bookSchema";
+import Author from "../models/authorSchema";
 
 export const getBooks = async (req: any, res: any) => {
   try {

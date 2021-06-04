@@ -16,7 +16,7 @@ const authorSchema = new mongoose.Schema(
     },
     works: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   { collection: "authors" }
