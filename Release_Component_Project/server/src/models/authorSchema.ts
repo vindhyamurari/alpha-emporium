@@ -14,10 +14,9 @@ const authorSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    works: {
-      type: String,
-      // required: true,
-    },
+    // image:{
+    //   type:String
+    // }
   },
   { collection: "authors" }
 );

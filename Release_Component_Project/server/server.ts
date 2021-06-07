@@ -5,7 +5,7 @@ import express from "express";
 import { bookRouter } from "./src/routes/bookRoutes";
 import { userRouter } from "./src/routes/userRoutes";
 import { authorRouter } from "./src/routes/authorRoutes";
-
+import {orderRouter} from "./src/routes/orderRoutes"
 const configureEnvironment = () => {
   env.config();
 };
@@ -39,6 +39,7 @@ const startServer = async () => {
   app.use("/api/books", bookRouter);
   app.use("/api/user", userRouter);
   app.use("/api/author", authorRouter);
+  app.use("/api/orders",orderRouter);
 };
 
 startServer()

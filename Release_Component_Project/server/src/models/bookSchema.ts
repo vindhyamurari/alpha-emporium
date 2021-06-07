@@ -11,6 +11,12 @@ const bookSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter Book Author"],
     },
+    authorImage:{
+      type:String
+    },
+    description:{
+      type:String
+    },
     price: {
       type: Number,
       required: [true, "Please enter Book price"],
@@ -53,7 +59,7 @@ const bookSchema = new mongoose.Schema(
           ref: "user",
           // required: true,
         },
-        title: {
+        name: {
           type: String,
           // required: true,
         },
