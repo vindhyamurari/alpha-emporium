@@ -1,95 +1,273 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import '../styles/Header.css'
+import {
+  Avatar,
+  createStyles,
+  fade,
+  InputAdornment,
+  makeStyles,
+  TextField,
+  Theme,
+} from "@material-ui/core";
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import "../styles/Header.css";
+import { useSelector, useDispatch } from "react-redux";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import HowToRegIcon from "@material-ui/icons/HowToReg";
+import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 interface Props {}
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    typography: {
+      padding: theme.spacing(2),
+    },
+    search: {
+      position: "relative",
+      borderRadius: /* theme.shape.borderRadius */ "2vw",
+      marginTop: "0.3vw",
+      marginBottom: "0.3vw",
+      backgroundColor: fade(theme.palette.common.white, 1),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.common.white, 0.55),
+      },
+      marginLeft: 0,
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(1),
+        width: "auto",
+      },
+    },
+    searchIcon: {
+      padding: theme.spacing(0, 2),
+      height: "100%",
+      position: "absolute",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    inputRoot: {
+      color: "gray",
+    },
+    inputInput: {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("sm")]: {
+        width: "12ch",
+        "&:focus": {
+          width: "20ch",
+        },
+      },
+    },
+  })
+);
+
 export default function Header({}: Props): ReactElement {
+  const [authorizedDisplay, setauthorizedDisplay] = useState(false);
+  const [userSearchInput, setuserSearchInput] = useState('')
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] =
+    React.useState<HTMLButtonElement | null>(null);
+  const [anchorElSearch, setAnchorElSearch] =
+    React.useState<HTMLButtonElement | null>(null);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const handleClickSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorElSearch(event.currentTarget);
+  };
+
+  const handleCloseSearch = () => {
+    setAnchorElSearch(null);
+  };
+  const openSearch = Boolean(anchorElSearch);
+  const idSearch = openSearch ? "simple-popover" : undefined;
+
   let history = useHistory();
   const logout = () => {
-    history.push("/");
+    // console.log('in logout')
+    // dispatch({ type: "USER_LOGGED_OUT" });
+    // console.log('dispatch done')
+    // setauthorizedDisplay(false);
+    // history.push("/");
   };
+  useEffect(
+    () => {
+      // if (state.token != "") {
+      //   setauthorizedDisplay(true);
+      // }
+    } /*  [state.token] */
+  );
+  const userSearchOption = (userSearchOn: string) => {
+    console.log(userSearchOn);
+    setAnchorElSearch(null);
+  };
+  const userOption = (userSelectedOption: string) => {
+    if (userSelectedOption === "myOrders") {
+      history.push("/", { from: "myOrders" });
+    } else if (userSelectedOption === "myCart") {
+      history.push("/cart");
+    }
+    // else if(userSelectedOption==='myAnswers'){
+    //   history.push('/myAnswers',{from:'myAnswers'});
+    // }
+    // else if(userSelectedOption==='myUpVotedQuestions'){
+    //   history.push('/',{from:'myUpVotedQuestions'})
+    // }
+    // else if(userSelectedOption==='myUpVotedAnswers'){
+    //   history.push('/myAnswers',{from:'myUpVotedAnswers'});
+    // }
+    setAnchorEl(null);
+  };
+
+  const searchInput=(e:any)=>{
+    console.log(e.target.value)
+    setuserSearchInput(e.target.value)
+    if (e.charCode === 13) {
+      console.log(`userSearchInput`, userSearchInput)
+    }
+  }
+  const checkIfEnter=(e:any)=>{
+    console.log(`e.charCode`, e.charCode)
+    if (e.charCode === 13) {
+      console.log(`userSearchInput`, userSearchInput)
+    }
+  }
   return (
     <nav className="navbar navbar-expand-md navbar my-nav-bar">
+      <Link to="/" style={{ textDecoration: "none" }}>
         <h6 className="navbar-brand-titleOne">Alpha Emporium</h6>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <div className="nav navbar-right">
-            <select
-              id="displayOptions"
-              className="btn btn-white select-options"
-              style={{ color: "#800020" }}
-              defaultValue="search"
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+          <div>
+            <Button onClick={handleClickSearch} >
+              <ExpandMoreRoundedIcon style={{ color: "#800020" }} />
+            </Button>
+            <Popover
+              id={idSearch}
+              open={openSearch}
+              anchorEl={anchorElSearch}
+              onClose={handleCloseSearch}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
             >
-              <option value="search" disabled>
-                Select Search Option
-              </option>
-              <option value="id" style={{ color: "#800020" }}>
-                Search by ID
-              </option>
-              <option value="title" style={{ color: "#800020" }}>
-                Search by Title
-              </option>
-              <option value="author" style={{ color: "#800020" }}>
-                Search by Author
-              </option>
-              <option value="rating" style={{ color: "#800020" }}>
-                Search by Rating
-              </option>
-              <option value="price" style={{ color: "#800020" }}>
-                Search by Price
-              </option>
-            </select>
-            <form className="seacrh-form" style={{display:"inline-block"}}>
-              <input
-                style={{height:'2vw',display:"inline-block"}}
-                className="search-from-input"
-                id="searchButton"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-              style={{height:'2.3vw',textAlign:'center',display:"inline-block",color:'#800020',backgroundColor:'white',border:'none' }}
-                className="search-from-btn"
-                type="button"
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userSearchOption("title")}
               >
-               <i className="fa fa-search"  style={{display:"inline-block"}} aria-hidden="true"></i>
-              </button>
-            </form>
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/" style={{color:'#800020'}}>
-                  Books
-                </Link>
-              </li>
-              <li>
-                 <button style={{color:'#800020',backgroundColor:'white',border:'none',marginTop:'0.6vw'  }} >
-                      Logout
-                    </button>
-                  </li>
-                  <li className="nav-item active" >
-                    <Link className="nav-link" to="/register" style={{color:'#800020'}}>
-                      Register
-                    </Link>
-                  </li>
-                  <li className="nav-item active">
-                    <Link className="nav-link" to="/login" style={{color:'#800020'}}>
-                      Login
-                    </Link>
-                  </li>
-            </ul>
+                Title
+              </Typography>
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userSearchOption("author")}
+              >
+                Author
+              </Typography>
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userSearchOption("rating")}
+              >
+                Rating
+              </Typography>
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userSearchOption("category")}
+              >
+                Category
+              </Typography>
+            </Popover>
+            </div>
+            <div> <input className="form-control form-control-sm" type="text" onChange={searchInput} onKeyPress={checkIfEnter}></input></div>
+         
+          <Link
+            className="nav-link"
+            to="/login"
+            title="Sign In"
+            style={{ color: "#800020", float: "right", marginLeft: "15vw" }}
+          >
+            <HowToRegIcon />
+          </Link>
+          <div style={{ display: "inline-block" }}>
+            <Button onClick={handleClick}>
+              <Avatar style={{ backgroundColor: "#800020" }}>J</Avatar>
+            </Button>
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+            >
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userOption("myOrders")}
+              >
+                My Orders
+              </Typography>
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={() => userOption("myCart")}
+              >
+                My Cart
+              </Typography>
+              <Typography
+                style={{ cursor: "pointer" }}
+                className={classes.typography}
+                onClick={logout}
+              >
+                Logout
+              </Typography>
+            </Popover>
           </div>
-        </div>
-      </nav>
+      </div>
+    </nav>
   );
 }

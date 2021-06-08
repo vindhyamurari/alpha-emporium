@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { ReactComponent as LoginImage } from "../Images/login.svg";
+import { toast, ToastContainer } from "react-toastify";
 import {
   Button,
   createMuiTheme,
@@ -13,9 +14,9 @@ import { grey } from "@material-ui/core/colors";
 import CheckIcon from "@material-ui/icons/Check";
 import { MyVerticallyCenteredModal } from "./Popup";
 import { Link, useHistory } from "react-router-dom";
-import {useSelector,useDispatch} from 'react-redux';
-import '../styles/login.css'
-import UserServices from '../Services/user-services'
+import { useSelector, useDispatch } from "react-redux";
+import "../styles/login.css";
+import UserServices from "../Services/user-services";
 
 interface Props {}
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,16 +32,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button: {
       marginLeft: theme.spacing(2),
-      backgroundColor:'#800020',
-      color:'white',
-      fontFamily:'Piazzolla'
+      backgroundColor: "#800020",
+      color: "white",
+      fontFamily: "Piazzolla",
     },
   })
 );
 export default function Login({}: Props): ReactElement {
   const classes = useStyles();
-  const [modalShow, setModalShow] = React.useState(false);
-  const [modalMessage, setmodalMessage] = useState("");
 
   const [login, setlogin] = useState({
     email: "",
@@ -48,10 +47,9 @@ export default function Login({}: Props): ReactElement {
   });
 
   let history = useHistory();
-  const dispatch=useDispatch();
-  
+  const dispatch = useDispatch();
 
-  const apiCall=new UserServices();
+  const apiCall = new UserServices();
 
   const inputEvent = (event: any) => {
     let value = event.target?.value;
@@ -59,34 +57,66 @@ export default function Login({}: Props): ReactElement {
     setlogin((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
+  const delay = (time: number) => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), time);
+    });
+  };
   const submitFormDetails = (e: any) => {
     e.preventDefault();
-    apiCall.loginUser(login,dispatch)
-   .then((returnValue)=>{console.log('user Registered',returnValue);history.push('/')})
-   .catch((error)=>{setModalShow(true);
-    if (error.response) {
-      setmodalMessage(error.response.data.message);
-      return;
-    }
-    setmodalMessage(error.message);
-  })
+    apiCall
+      .loginUser(login, dispatch)
+      .then(async (returnValue) => {
+        toast.success("Login Successful !", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        await delay(5000);
+        history.push("/");
+      })
+      .catch(async (error) => {
+        if (error.response) {
+          toast.error(error.response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          await delay(5000);
+          history.push("/");
+          return;
+        }
+        toast.error(error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        await delay(5000);
+        history.push("/");
+      });
   };
 
   return (
     <div>
-    <MyVerticallyCenteredModal
-      header="Failed"
-      body={modalMessage}
-      show={modalShow}
-      onHide={() => {
-        setModalShow(false);
-      }}
-    />
-      <div className="container" style={{marginLeft:'15vw'}}>
+      <div className="container main-login-contain" >
         <div className="row login-container">
-          <div className="col login-form"><div >
-          <LoginImage className='login-image'></LoginImage>
-              </div></div>
+          <div className="col login-form">
+            <div>
+              <LoginImage className="login-image"></LoginImage>
+            </div>
+          </div>
           <div className="col login-form">
             <form onSubmit={submitFormDetails} className={classes.root}>
               <ThemeProvider
@@ -98,7 +128,18 @@ export default function Login({}: Props): ReactElement {
               >
                 <div className="logi-from-inner">
                   <p style={{ color: "#800020", marginLeft: "0vw" }}>
-                   Not A User ? Please <Link to="/register" style={{ textDecoration:"none" ,color: "#51A7AD", marginLeft: "0vw" }}> Sign Up </Link>
+                    Not A User ? Please{" "}
+                    <Link
+                      to="/register"
+                      style={{
+                        textDecoration: "none",
+                        color: "#51A7AD",
+                        marginLeft: "0vw",
+                      }}
+                    >
+                      {" "}
+                      Sign Up{" "}
+                    </Link>
                   </p>
                   <div>
                     <TextField
@@ -138,9 +179,10 @@ export default function Login({}: Props): ReactElement {
                 </div>
               </ThemeProvider>
             </form>
+            <ToastContainer />
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 }

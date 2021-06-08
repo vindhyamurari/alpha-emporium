@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'
 import './styles/style.css'
 import store from './Reducers/redux-store'
 import {Provider} from 'react-redux'

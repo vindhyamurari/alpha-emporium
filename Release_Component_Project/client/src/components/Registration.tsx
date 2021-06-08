@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { ReactComponent as RegisterImage } from "../Images/register.svg";
+import {toast,ToastContainer} from 'react-toastify';
 import {
   Button,
   createMuiTheme,
@@ -13,7 +14,6 @@ import { MyVerticallyCenteredModal } from "./Popup";
 import { Link, useHistory } from "react-router-dom";
 import '../styles/register.css'
 import { pink } from "@material-ui/core/colors";
-import {useSelector} from 'react-redux';
 import UserServices from '../Services/user-services';
 
 interface Props {}
@@ -38,12 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 export default function Register({}: Props): ReactElement {
   const classes = useStyles();
-  const [modalShow, setModalShow] = React.useState(false);
-  const [modalMessage, setmodalMessage] = useState("");
   const [passwordMatch, setpasswordMatch] = useState("");
   
   let history = useHistory();
-  const user=useSelector((state:any)=>state.user);
+  
 
   const apiCall=new UserServices();
 
@@ -70,6 +68,12 @@ export default function Register({}: Props): ReactElement {
     setregister((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
+  const delay = (time: number) => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), time);
+    });
+  };
+
   const submitFormDetails = (e: any) => {
     e.preventDefault();
     let {name,email,phone,password}=register;
@@ -77,28 +81,51 @@ export default function Register({}: Props): ReactElement {
     const userDetails={name,email,phoneNumber,password}
     console.log(`userDetails`, userDetails)
    apiCall.registerUser(userDetails)
-   .then((returnValue)=>{console.log('user Registered',returnValue);history.push('/')})
-   .catch((error)=>{
-    setModalShow(true);
+   .then(async (returnValue)=>{
+    toast.success("Registered Successfully !", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    await delay(5000);
+    history.push("/");
+    })
+   .catch(async (error)=>{
     if (error.response) {
-      setmodalMessage(error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      await delay(5000);
+      history.push("/");
       return;
     }
-    setmodalMessage(error.message);
+    toast.error(error.message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    await delay(5000);
+    history.push("/");
   })
    
   };
   return (
     <div>
-    <MyVerticallyCenteredModal
-      header="Failed"
-      body={modalMessage}
-      show={modalShow}
-      onHide={() => {
-        setModalShow(false);
-      }}
-    />
-      <div className="container" style={{marginLeft:'15vw'}}>
+      <div className="container main-registration-contain">
         <div className="row registration-container">
           <div className="col registration-form"><div >
           <RegisterImage className='registration-image'></RegisterImage>
@@ -113,7 +140,7 @@ export default function Register({}: Props): ReactElement {
           })}
         >
             <div className="regi-from-inner">
-            <p style={{ color: "#800020", marginLeft: "0vw" }}>
+            <p className="para" style={{ color: "#800020", marginLeft: "0vw" }}>
                    Already A User ? Please <Link to="/login" style={{ textDecoration:"none" ,color: "#51A7AD", marginLeft: "0vw" }}> Sign In </Link>
                   </p>
           <div>
@@ -196,6 +223,7 @@ export default function Register({}: Props): ReactElement {
           </div>
           </ThemeProvider>
       </form>
+      <ToastContainer />
           </div>
         </div>
       </div>
