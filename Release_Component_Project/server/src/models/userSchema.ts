@@ -49,8 +49,9 @@ const userSchema = new mongoose.Schema(
       ref: "books",
       // required: true,
     },
-    resetPasswordToken: String,
-    resetPasswordExpiry: Date,
+    cart:{
+      type:Array
+    }
   },
   { collection: "users", timestamps: true }
 );

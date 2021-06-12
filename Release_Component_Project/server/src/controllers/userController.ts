@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 
 export const registerUser = async (req: any, res: any) => {
   try {
-    const { name, email, phoneNumber, password } = req.body;
+    const { name, email, phoneNumber, password,role } = req.body;
     let user: any;
     try {
       user = await User.create({
@@ -12,6 +12,7 @@ export const registerUser = async (req: any, res: any) => {
         email,
         phoneNumber,
         password,
+        role
       });
       bcrypt.genSalt(10, (err: any, salt: any) => {
         bcrypt.hash(user.password, salt, (err: any, hash: any) => {
@@ -79,6 +80,7 @@ export const loginUser = async (req: any, res: any) => {
                 .status(404)
                 .send({ message: "token expired", success: false });
             }
+           else{
             return res.status(200).send({
               user: {
                 name: user.name,
@@ -90,6 +92,7 @@ export const loginUser = async (req: any, res: any) => {
               message: "Successfully logged-in",
               success: true,
             });
+           }
           }
         );
       });
