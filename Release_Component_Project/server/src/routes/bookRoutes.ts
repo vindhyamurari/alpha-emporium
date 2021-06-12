@@ -7,6 +7,7 @@ import {
   getBookById,
   createbookReview,
   getBookReviews,
+  getBooksByText
 } from "../controllers/bookController";
 import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth";
 
@@ -16,9 +17,9 @@ bookRouter.get("/", getBooks);
 bookRouter.put("/review",isAuthenticatedUser,createbookReview)
 bookRouter.get("/review/:bookId",isAuthenticatedUser,getBookReviews)
 bookRouter.get("/:id", getBookById);
-
 bookRouter.post("/", isAuthenticatedUser, authorizeRoles("admin"), addNewBook);
-
+bookRouter.get("/text/:text",getBooksByText);
+// bookRouter.get()
 bookRouter.delete(
   "/:id",
   isAuthenticatedUser,
@@ -31,4 +32,5 @@ bookRouter.put(
   authorizeRoles("admin"),
   updateBook
 );
+
 

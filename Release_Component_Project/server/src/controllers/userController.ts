@@ -70,7 +70,7 @@ export const loginUser = async (req: any, res: any) => {
         }
 
         jwt.sign(
-          { id: user._id },
+          { id: user._id,name:user.name},
           `${process.env.jwtSecret}`,
           { expiresIn: "1d" },
           (err: any, token: any) => {

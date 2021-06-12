@@ -6,6 +6,9 @@ import { bookRouter } from "./src/routes/bookRoutes";
 import { userRouter } from "./src/routes/userRoutes";
 import { authorRouter } from "./src/routes/authorRoutes";
 import {orderRouter} from "./src/routes/orderRoutes"
+import {paymentRouter} from "./src/routes/paymentRoutes";
+import {cartRouter} from "./src/routes/cartRoutes"
+
 const configureEnvironment = () => {
   env.config();
 };
@@ -40,6 +43,8 @@ const startServer = async () => {
   app.use("/api/user", userRouter);
   app.use("/api/author", authorRouter);
   app.use("/api/orders",orderRouter);
+  app.use("/api/cart",cartRouter);
+  app.use("/api",paymentRouter);
 };
 
 startServer()

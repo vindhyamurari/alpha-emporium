@@ -32,7 +32,7 @@ export const isAuthenticatedUser = catchAsyncErrors(
         }
 
         req.user = user;
-        console.log(user);
+        console.log("user----->",user);
         next();
       });
     } catch (err) {

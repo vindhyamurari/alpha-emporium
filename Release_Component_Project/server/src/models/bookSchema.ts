@@ -78,7 +78,7 @@ const bookSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { collection: "books", timestamps: true }
+  { collection: "booooooks", timestamps: true }
 );
 
 export = mongoose.model("Book", bookSchema);
