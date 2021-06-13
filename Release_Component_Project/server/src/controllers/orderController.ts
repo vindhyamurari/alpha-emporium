@@ -6,35 +6,31 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 // Create a new order   =>  /api/v1/order/new
 export const newOrder = catchAsyncErrors(async (req:any, res:any, next:any) => {
-    const {
-        orderItems,
-        shippingInfo,
-        itemsPrice,
-        taxPrice,
-        shippingPrice,
-        totalPrice,
-        paymentInfo
-
-    } = req.body;
-    console.log("helooooo aALPHAAAAAAAAAAA",req.user);
+    try{
+        const {
+            orderItems,
+            totalPrice,
+            paymentInfo
     
-    const order = await Order.create({
-        orderItems,
-        shippingInfo,
-        itemsPrice,
-        taxPrice,
-        shippingPrice,
-        totalPrice,
-        paymentInfo,
-        paidAt: Date.now(),
-        user: req.user.id
-    })
-console.log("order",order);
-
-    res.status(200).json({
-        success: true,
-        order
-    })
+        } = req.body;
+        console.log("helooooo aALPHAAAAAAAAAAA",req.user);
+        
+        const order = await Order.create({
+            orderItems,
+            totalPrice,
+            paymentInfo,
+            paidAt: Date.now(),
+            user: req.user.id
+        })
+    console.log("order",order);
+    
+        res.status(200).json({
+            success: true,
+            order
+        })
+    }catch(err){
+        res.status(400).send({success:false,message:"Order not created"})
+    }
 })
 
 export const getSingleOrder = catchAsyncErrors(async (req:any, res:any, next:any) => {
@@ -124,7 +120,7 @@ export const getAllUserOrders = async (req: any, res: any, next: any) => {
       console.log("userID",userId);
       let userOrders: any = await Order.find({user: userId });
       console.log(userOrders);
-      
+
       res.status(200).send(userOrders);
     } catch (err: any) {
       res.status(404).json({ err: err.message, success: false });

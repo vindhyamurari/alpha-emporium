@@ -64,3 +64,20 @@ export const getUserOrder = async (req: any, res: any, next: any) => {
     res.status(404).json({ err: err.message, success: false });
   }
 };
+
+export const clearUserCart = async (req: any, res: any, next: any) => {
+  try {
+    const userId = req.body.id;
+    console.log("userID",userId);
+    let clearCart=await User.updateOne({_id:userId}, { $set : {cart: [] }} , {multi:true} );
+    //let user: any = await User.findOne({ _id: userId });
+    //let products = user.cart;
+    console.log("clearcart products", clearCart);
+    //let cartItems = await Book.find({ _id: { $in: products } });
+    console.log(clearCart);
+    
+    res.status(200).send({success:true,message:"Cart is emptied."});
+  } catch (err: any) {
+    res.status(404).json({ err: err.message, success: false });
+  }
+};
