@@ -2,6 +2,7 @@ import express from "express";
 import {
     allOrders,
     deleteOrder,
+    getAllUserOrders,
     getSingleOrder,
     myOrders,
  newOrder,
@@ -11,6 +12,7 @@ import { isAuthenticatedUser, authorizeRoles } from "../middlewares/auth";
 
 export const orderRouter = express.Router();
 
+orderRouter.post("/",getAllUserOrders);
 orderRouter.post("/new", isAuthenticatedUser,newOrder);
 orderRouter.get("/myOrders",isAuthenticatedUser,myOrders)
 orderRouter.get('/admin/orders',isAuthenticatedUser, authorizeRoles('admin'), allOrders);

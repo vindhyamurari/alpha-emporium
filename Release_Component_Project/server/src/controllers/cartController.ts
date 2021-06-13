@@ -20,8 +20,8 @@ export const addToCart = async (req: any, res: any, next: any) => {
         message: "Added to cart successfully",
         updatedCart,
       });
-    // else
-    //     return res.status(200).send({success:false,message:'Already Added'})
+    else
+        return res.status(200).send({success:false,message:'Already Added'})
   } catch (err) {
     res.status(200).send({ success: false, messages: err.message });
   }
@@ -42,8 +42,8 @@ export const deleteFromCart = async (req: any, res: any, next: any) => {
         message: "Removed from cart successfully",
         updatedCart,
       });
-    // else
-    //     return res.status(200).send({success:false,message:'Already Added'})
+    else
+        return res.status(200).send({success:false,message:'Already Added'})
   } catch (err) {
     res.status(200).send({ success: false, messages: err.message });
   }
@@ -52,6 +52,7 @@ export const deleteFromCart = async (req: any, res: any, next: any) => {
 export const getUserOrder = async (req: any, res: any, next: any) => {
   try {
     const userId = req.body.id;
+    console.log("userID",userId);
     let user: any = await User.findOne({ _id: userId });
     let products = user.cart;
     console.log("cart products", products);

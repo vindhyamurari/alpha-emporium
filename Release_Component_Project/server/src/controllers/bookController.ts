@@ -122,15 +122,15 @@ export const getBookReviews = catchAsyncErrors(async (req:any, res:any, next:any
       reviews:book.reviews
   })
 })
-// export const getBookByAuthor=  async (req: any, res: any) => {
-//   try {
-//     const books = await Book.find({ author: req.params.author });
-//     //    res.json(books)
-//     res.send(JSON.stringify(books));
-//   } catch (err) {
-//     res.send("Error " + err);
-//   }
-// };
+export const getBookByAuthor=  async (req: any, res: any) => {
+  try {
+    const books = await Book.find({ author: req.params.author });
+    //    res.json(books)
+    res.send(JSON.stringify(books));
+  } catch (err) {
+    res.send("Error " + err);
+  }
+};
 
 // export const getBookByText= async (req: any, res: any) => {
 //   try {
@@ -150,26 +150,26 @@ export const getBooksByText=async(req:any,res:any,next:any)=>{
 
 
 
-// export const getBookByTitle= async (req: any, res: any) => {
-//   try {
-//     const title = new RegExp(req.params.title, "i");
-//     const books = await Book.find({ title });
-//     //    res.json(books)
-//     res.send(books);
-//   } catch (err) {
-//     res.send("Error " + err);
-//   }
-// };
+export const getBookByTitle= async (req: any, res: any) => {
+  try {
+    const title = new RegExp(req.params.title, "i");
+    const books = await Book.find({ title });
+    //    res.json(books)
+    res.send(books);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+};
 
-// export const getBookByRating=async (req: any, res: any) => {
-//   try {
-//     let books = await Book.find({ rating: { $gte: req.params.rating } });
-//     // console.log(JSON.stringify(books))
-//     res.send(books);
-//   } catch (err) {
-//     res.send("Error " + err);
-//   }
-// };
+export const getBookByRating=async (req: any, res: any) => {
+  try {
+    let books = await Book.find({ rating: { $gte: req.params.rating } });
+    // console.log(JSON.stringify(books))
+    res.send(books);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+};
 
 export const getBookByPrice=async (req: any, res: any) => {
   try {
@@ -187,3 +187,14 @@ export const getBookByPrice=async (req: any, res: any) => {
     res.send("Error " + err);
   }
 };
+
+export const getBookByTags=async(req: any, res: any) => {
+  try {
+    const tag = new RegExp(req.params.tag, "i");
+    const books = await Book.find({tags:tag});
+    //    res.json(books)
+    res.send(books);
+  } catch (err) {
+    res.send("Error " + err);
+  }
+}

@@ -1,6 +1,6 @@
 import Order from "../models/ordersSchema";
-import Book from "../models/bookSchema"
-
+import Book from "../models/bookSchema";
+import User from "../models/userSchema";
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
@@ -117,3 +117,16 @@ export const deleteOrder = catchAsyncErrors(async (req:any, res:any, next:any) =
         success: true
     })
 })
+
+export const getAllUserOrders = async (req: any, res: any, next: any) => {
+    try {
+      const userId = req.body.id;
+      console.log("userID",userId);
+      let userOrders: any = await Order.find({user: userId });
+      console.log(userOrders);
+      
+      res.status(200).send(userOrders);
+    } catch (err: any) {
+      res.status(404).json({ err: err.message, success: false });
+    }
+  };
