@@ -40,3 +40,13 @@ export const addNewAuthor = async (req: any, res: any) => {
     res.status(404).json({ err: err.message, success: false });
   }
 };
+
+export const getAuthorByName=async(req:any,res:any)=>{
+  try{
+    let name=req.params.authorName;
+    const Authors=await Author.findOne({name});
+    res.status(200).json(Authors);
+  }catch(err:any){
+    res.status(404).json({err:err.message,success:false})
+  }
+}
