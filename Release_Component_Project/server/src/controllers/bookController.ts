@@ -49,9 +49,9 @@ export const updateBook = async (req: any, res: any) => {
   try {
     const book: any = await Book.findById(req.params.id);
 
-    book.rating = req.body.rating;
-    book.votes = req.body.votes;
-    book.stock = req.body.stock;
+    book.ratings = req.body.ratings||book.ratings;
+    book.votes = req.body.votes||book.votes;
+    book.stock = req.body.stock||book.stock;
     book.authorImage=req.body.authorImage;
     if (req.body.discount) {
       book.discount = req.body.discount;
