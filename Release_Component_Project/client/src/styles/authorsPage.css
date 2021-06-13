@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+.author-details-row{
+    margin-top:3vw;
+    padding-top: 5vw;
+    margin-bottom: 17vw;
+}
+.each-item{
+    font-family: 'Lora', serif;
+}
+.list-of-books{
+    width:25vw;
+    margin-top: 2vw;
+}
+.intrests{
+    width:15vw;
+    margin-top: 2vw;
+    float: right;
+}
+.author-name{
+    margin-top: 2vw;
+}

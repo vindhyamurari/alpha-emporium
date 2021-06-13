@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+.book-details-img{
+    max-width: 20vw;
+    max-height: 30vw;
+    border-radius: 0.5vw;
+    box-shadow: 0px 0px 5px rgb(172, 172, 172);
+}
+.read-more-less{
+    color: #51A7AD;
+    cursor: pointer;
+    font-weight: bold;
+}
+.book-description{
+    font-family: 'Lora', serif;
+    text-align:justify;
+}
+.icons{
+    color:rgb(189, 189, 189);
+    margin-left: 1vw;
+}
+.icon-cols{
+    font-family:'Cambria', serif;
+    text-align: justify;
+}
+.details-container{
+    margin: 4vw !important;
+    padding: 0px !important;
+}
+.price-section{
+    font-family: 'Lora', serif;
+    margin-top: 6vw;
+    margin-left: 2vw;
+    font-size: 1.3vw;
+}
+.quantity{
+    width:3vw !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    display: inline-block;
+    margin-bottom:0.7vw;
+    text-align: center;
+    border: 0.1vw solid rgb(207, 204, 204);
+    box-shadow: 0px 0px 2px rgb(199, 198, 198);
+}
+.price-info{
+    padding: 0.3vw;
+}
+.detail-btn{
+    background-color: white;
+    border: 0.1vw solid rgb(207, 204, 204);
+    border-radius: 0.3vw;
+    margin:0.8vw;
+    box-shadow: 0px 0px 2px rgb(199, 198, 198);
+}
+.product-details{
+    font-family: 'Lora', serif;
+    margin-top: 5vw;
+    margin-left: 1vw;
+}
+.product-details-span{
+    font-size: 1.2vw;
+    padding: 1.2vw 0vw;
+}
+.user-reviews{
+    font-family: 'Lora', serif;
+    margin-top: 5vw;
+}
+.reviewer-name{
+    font-size: 1.2vw;
+    margin-bottom: 10vw;
+}
+.user-icon{
+    color:rgb(189, 189, 189);
+}
+.add-comment{
+    font-family: 'Lora', serif;
+    margin-top: 6vw;
+    margin-left: 2vw;
+    margin-bottom: 2vw;
+    font-size: 1.3vw;
+}
+.rating-input{
+    font-family: 'Lora', serif;
+    margin-left: 10vw;
+    margin-top: 5vw;
+}
+.review-form{
+    margin-top: 2vw;
+}
+.add-comment-text{
+    margin-bottom: 2vw;
+}
+.tag-line{
+    margin-left: 15vw;
+    font-family: 'Lora', serif;
+}
+.add-comment-btn{
+    border: 0vw;
+    border-radius: 0vw;
+    box-shadow:0;
+    background-color: white;
+    color:#51A7AD;
+    margin-top: 3vw;
+}

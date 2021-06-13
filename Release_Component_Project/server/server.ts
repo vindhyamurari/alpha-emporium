@@ -2,7 +2,12 @@ import mongoose from "mongoose";
 import cors from "cors";
 import env from "dotenv";
 import express from "express";
-import { router } from "./src/routes/bookRoutes";
+import { bookRouter } from "./src/routes/bookRoutes";
+import { userRouter } from "./src/routes/userRoutes";
+import { authorRouter } from "./src/routes/authorRoutes";
+import {orderRouter} from "./src/routes/orderRoutes"
+import {paymentRouter} from "./src/routes/paymentRoutes";
+import {cartRouter} from "./src/routes/cartRoutes"
 
 const configureEnvironment = () => {
   env.config();
@@ -17,6 +22,7 @@ async function connectToDatabase() {
   await mongoose.connect(connstr, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   });
   console.log("Connected to DATABASE");
 }
@@ -33,7 +39,12 @@ const startServer = async () => {
   server.on("error", (error: any) =>
     console.log("server error : ", error.message)
   );
-  app.use("/books", router);
+  app.use("/api/books", bookRouter);
+  app.use("/api/user", userRouter);
+  app.use("/api/author", authorRouter);
+  app.use("/api/order",orderRouter);
+  app.use("/api/cart",cartRouter);
+  app.use("/api",paymentRouter);
 };
 
 startServer()

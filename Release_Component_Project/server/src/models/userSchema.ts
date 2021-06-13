@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       required: [true, "Please enter your phone number"],
-      length: [10, "Please enter 10 digit mobile number"],
+      length: [13, "Please enter 10 digit mobile number"],
       validate: [validator.isMobilePhone, "Please enter a valid mobile number"],
     },
     password: {
@@ -49,8 +49,9 @@ const userSchema = new mongoose.Schema(
       ref: "books",
       // required: true,
     },
-    resetPasswordToken: String,
-    resetPasswordExpiry: Date,
+    cart:{
+      type:Array
+    }
   },
   { collection: "users", timestamps: true }
 );

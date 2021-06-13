@@ -1,0 +1,85 @@
+.main-login-contain{
+    margin-top: 3.5vw;
+    margin-left: 15vw !important;
+    margin-right: auto;
+}
+.login-container{
+    padding-left: 5vw;
+    padding-right: 3vw;
+    width: 70vw;
+}
+.login-image{
+    max-width:30vw;
+    height:30vw;
+}
+.login-form{
+    height:37vw;
+}
+.logi-from-inner{
+    margin: 8.5vw 0vw 0vw 7vw;
+}
+
+@media screen and (max-width: 786px) {
+    .main-login-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+    }
+    .login-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .login-image{
+        margin-left: 2vw;
+        max-width:25vw;
+        height:30vw;
+    }
+    .login-form{
+        margin-left: 3vw;
+    }
+    .logi-from-inner{
+        margin: 8.5vw 0vw 0vw 2vw;
+    }
+}
+@media screen and (max-width: 425px) {
+    .main-login-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+        font-size: 12px;
+    }
+    .login-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .login-image{
+        display: none;
+    }
+    .login-form{
+        margin-left: 0vw;
+    }
+    .logi-from-inner{
+        margin: 6vw 0vw 0vw 5vw;
+    }
+}
+@media screen and (max-width: 320px) {
+    .main-login-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+        font-size: 12px;
+    }
+    .login-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .login-image{
+        display: none;
+    }
+    .login-form{
+        margin-left: 9vw;
+    }
+    .logi-from-inner{
+        margin: 2vw 0vw 0vw 7vw;
+    }
+}

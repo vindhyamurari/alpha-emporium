@@ -1,0 +1,16 @@
+export const USER_LOGIN='USER_LOGIN';
+export const USER_LOGOUT='USER_LOGOUT';
+
+
+export const PAGE_NUMBER='PAGE_NUMBER';
+
+export const SET_ALL_BOOKS='SET_ALL_BOOKS';
+export const SET_SEARCH_BY='SET_SEARCH_BY';
+export const SET_SEARCH_INPUT='SET_SEARCH_INPUT';
+export const SET_SEARCHED_BOOKS='SET_SEARCHED_BOOKS';
+
+export const SET_PURCHASE_DETAILS='SET_PURCHASE_DETAILS';
+
+
+export const SET_CART_ITEMS='SET_CART_ITEMS';
+

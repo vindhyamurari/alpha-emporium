@@ -1,0 +1,91 @@
+.main-registration-contain{
+    margin-top: 3.5vw;
+    margin-left: 15vw;
+    margin-right: auto;
+}
+.registration-container{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    width: 70vw;
+}
+.registration-image{
+    max-width:30vw;
+    height:30vw;
+}
+.registration-form{
+    height:37vw;
+}
+.regi-from-inner{
+    margin: 0vw 0vw 0vw 9vw;
+}
+
+@media screen and (max-width: 786px) {
+    .main-registration-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+    }
+    .registration-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .registration-image{
+        margin-left: 2vw;
+        max-width:25vw;
+        height:30vw;
+    }
+    .registration-form{
+        margin-left: 3vw;
+    }
+    .regi-from-inner{
+        margin: 8.5vw 0vw 0vw 2vw;
+    }
+}
+@media screen and (max-width: 425px) {
+    .main-registration-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+        font-size: 12px;
+    }
+    .registration-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .registration-image{
+        display: none;
+    }
+    .registration-form{
+        margin-left: 0vw;
+    }
+    .regi-from-inner{
+        margin: 6vw 0vw 0vw 5vw;
+    }
+}
+@media screen and (max-width: 320px) {
+    .main-registration-contain{
+        margin-top: 0vw;
+        margin-left: 0vw !important;
+        margin-right: 0vw;
+        font-size: 12px;
+    }
+    .registration-container{
+        padding-left: 0vw !important;
+        padding-right: 0vw !important;
+    }
+    .registration-image{
+        display: none;
+    }
+    .registration-form{
+        margin-left: 9vw;
+    }
+    .registration-form{
+        height:0vw;
+    }
+    .regi-from-inner{
+        margin: 1vw 0vw 0vw 7vw;
+    }
+    .para{
+        margin: 0px !important;
+    }
+}

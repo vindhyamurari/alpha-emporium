@@ -1,0 +1,39 @@
+.pagination-holder{
+    padding-left: 40vw;
+}
+.pagination{
+    margin-top: 1vw;
+    margin-bottom: 2vw;
+  
+}
+
+@media screen and (max-width: 768px) {
+    .pagination-holder{
+        padding-left: 30vw;
+    }
+    .pagination{
+        margin-top: 5vw;
+        margin-bottom: 1vw;
+    }
+  }
+  
+  @media screen and (max-width: 425px) {
+    .pagination-holder{
+        padding-left: 20vw;
+    }
+    .pagination{
+        margin-top: 10vw;
+        font-size: 1px !important;
+    }
+  }
+
+   
+  @media screen and (max-width: 320px) {
+    .pagination-holder{
+        padding-left: 10vw;
+    }
+    .pagination{
+        margin-top: 40vw;
+        font-size: 1px !important;
+    }
+}
