@@ -8,16 +8,10 @@ class UserServices{
         return response;
     }
 
-    loginUser=async (login:any,dispatch:any)=>{
-        try{
-            let response =await axios.post('http://localhost:8000/api/user/login',login)
-            dispatch({type:Constants.USER_LOGIN,payload:response.data});
-            console.log(`response.data`, response.data)
-            return response.data;
-        }
-        catch(error){
-            return error;
-        }
+    loginUser=async (login:any)=>{
+        let response =await axios.post('http://localhost:8000/api/user/login',login)
+         return response;
+    
     }
 }
 

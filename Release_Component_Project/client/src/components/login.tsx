@@ -17,6 +17,7 @@ import { MyVerticallyCenteredModal } from "./Popup";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/login.css";
+import * as Constants from '../Reducers/constants'
 import UserServices from "../Services/user-services";
 
 interface Props {}
@@ -65,12 +66,13 @@ export default function Login({}: Props): ReactElement {
   };
   const submitFormDetails = (e: any) => {
     e.preventDefault();
-    apiCall.loginUser(login, dispatch)
-      .then(async (returnValue) => {
+    apiCall.loginUser(login)
+      .then(async (response) => {
+        dispatch({type:Constants.USER_LOGIN,payload:response.data});
         setImmediate(()=>{
           toast.success("Login Successful !", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -78,35 +80,24 @@ export default function Login({}: Props): ReactElement {
             progress: undefined,
           });
         },0)
-        await delay(5000);
+        await delay(4000);
         history.goBack();
       })
       .catch(async (error) => {
-        if (error.response) {
-          toast.error(error.response.data.message, {
+
+          toast.error("Couldnt Login Try Again", {
             position: "top-right",
-            autoClose: 4000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
           });
-          await delay(4000);
+          await delay(3000);
           history.push("/");
           return;
-        }
-        toast.error(error.message, {
-          position: "top-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        await delay(4000);
-        history.push("/");
+      
       });
   };
 
@@ -130,18 +121,7 @@ export default function Login({}: Props): ReactElement {
               >
                 <div className="logi-from-inner">
                   <p style={{ color: "#800020", marginLeft: "0vw" }}>
-                    Not A User ? Please{" "}
-                    <Link
-                      to="/register"
-                      style={{
-                        textDecoration: "none",
-                        color: "#51A7AD",
-                        marginLeft: "0vw",
-                      }}
-                    >
-                      {" "}
-                      Sign Up{" "}
-                    </Link>
+                   Not A User ? Please <Link to="/register" style={{ textDecoration:"none" ,color: "#51A7AD", marginLeft: "0vw" }}> Sign Up </Link>
                   </p>
                   <div>
                     <TextField

@@ -31,55 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SingleBookDetails({book,getBookById}: Props): ReactElement {
 
-  // let book={_id:112379787318387983,stock:1,description:`THE LOST EPIC ============ The story of the epic battle of
-  // Kurukshetra has been told and retold for ages. Millennia of dust,
-  // fables, imaginations — and the epic itself is lost. What remained
-  // is the story of a family feud and ambition of Kauravas and
-  // Pandavas. But why, then, was this an epic war? Why entire Aryavart
-  // plunged into this first real world-war? Why the echo of this
-  // ancient war still resonates after all those centuries? Rediscover
-  // the lost epic whose origin lies in the birth of the Kurukshetra
-  // that had tasted its first blood over a hundred years before the
-  // final Mahabharata war. Discover the complete saga of Mahabharata
-  // which goes far and beyond just Kauravas and Pandavas and their
-  // ambitions.THE ACCURSED GOD ================ Long before the epic battle,
-  // long before even the birth of Kurukshetra, a man swore on his
-  // father’s pyre to avenge against the mightiest empire, any
-  // civilization had ever seen. Between his might and near-certain
-  // destruction of the Empire, stood a warrior, who rose like a
-  // phoenix from the ashes of his seven dead brothers — taking the
-  // mantle of a fabled Accursed God. In the clash that followed,
-  // Aryavart heard several more oaths by the side of more burning
-  // pyres, until, a young king decided that no price is too high for
-  // peace. Little did he know that the price would be a war
-  // engulfing the entire Aryavart, where few would live to tell the
-  // tale. And only one man can delay the inevitable if not prevent
-  // it. He is the accursed God and even he doesn’t know that destiny
-  // is like a quicksand, the more he tries to prevent it, the faster
-  // Aryavart moves towards the ultimate catastrophe. Discover the
-  // saga of a man’s journey to that of a legendary and universally
-  // hated Accursed God, the saga of the ruthless ambitions and
-  // unfulfilled loves, endless deceits and vengeful oaths, and the
-  // saga of the battles to prevent the ultimate war. TESTIMONIALS
-  // ============= When is the last time you finished a book and
-  // discover something? Here is a gripping and intriguing take on
-  // the greatest epic of all time through the eyes of its pivotal
-  // character that leaves your mind exhilarated, adding a fresh
-  // perspective to the tale that’s known, yet unknown. Throughout
-  // the fast action-packed book, the author masterfully blends
-  // politics, war and science and blurs the gap between love and
-  // hate, peace and war, and fiction and reality. A must-read novel
-  // which will leave you wanting for more. --- Colonel Avanish,
-  // Indian Army`,reviews:[{name:'Sreedhar',rating:5,comment:`Fascinating book about the legendary Bhishma, 
-  // with refreshing insights! With excess focus in the modern day narrations about the events connected to 
-  // the Pandava-Kaurava rivalry, the role of Bhishma has not got its due. This book is a big step towards addressing
-  // this anomaly.Portrayal of Bhishma as well as other prominent characters including Bhagwan Parasuram and Kashi 
-  // Princess Amba, has been exceptionally brilliant. The palace intrigues at Hastinapur, Panchal, Kashi, has been 
-  // presented in a lucid  way.`},{name:'Lokesh',rating:5,comment:`This is an amazing book that will force you to think. 
-  // Finally a copy of Mahabharat which doesn't rely on mirch masala but truth.`},{name:'Prabir',rating:4,comment:`It's a good read, shouldn't be looked at from 
-  // The Mahabharata's point of view. The focus shifted from The Bhishma to other characters. it's the writer's retelling of a story,
-  // but not the epic. will be waiting for the second half.`}]}
-
   const classes = useStyles();
   const [bookDescription, setbookDescription] = useState(book.description.substring(0,400))
   const [readMoreFlag, setReadMoreFlag] = useState(false)
@@ -263,11 +214,9 @@ export default function SingleBookDetails({book,getBookById}: Props): ReactEleme
                 {!stockFlag? <span className="stock" style={{color:'green'}}><b>In Stock</b></span>
                 :<span className="stock" style={{color:'red'}}><b>Out Of Stock</b></span>}  
               </div>
-              {/* <div className="row price-row" style={{display:'inline-block'}}>
-                <span>Quantity : </span><input type="number" min="1" max="100" step="1" className="quantity" /> {/* add stock as max
-              </div> */}
               <div className="row price-row">
-                <button className="add-to-cart detail-btn" onClick={()=>AddToCart()}><i className="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart </button>
+              {!stockFlag?<button className="add-to-cart detail-btn" onClick={()=>AddToCart()}><i className="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart </button>:
+                <button className="add-to-cart detail-btn" disabled><i className="fa fa-shopping-cart" aria-hidden="true"></i> Add to Cart </button>}
               </div>
               <div className="row price-row">
               {!stockFlag?<button className="buy detail-btn" onClick={()=>proceedToCheckOut()}><i className="fa fa-credit-card-alt" aria-hidden="true"></i> Buy Book </button>

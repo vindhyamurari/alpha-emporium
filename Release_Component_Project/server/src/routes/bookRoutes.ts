@@ -45,3 +45,5 @@ bookRouter.put(
 );
 
 
+bookRouter.delete("/:id", isAuthenticatedUser, deleteBook);
+

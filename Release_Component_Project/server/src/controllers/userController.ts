@@ -4,15 +4,14 @@ import bcrypt from "bcryptjs";
 
 export const registerUser = async (req: any, res: any) => {
   try {
-    const { name, email, phoneNumber, password,role } = req.body;
+    const { name, email, phoneNumber, password} = req.body;
     let user: any;
-    try {
+    try{
       user = await User.create({
         name,
         email,
         phoneNumber,
-        password,
-        role
+        password
       });
       bcrypt.genSalt(10, (err: any, salt: any) => {
         bcrypt.hash(user.password, salt, (err: any, hash: any) => {
@@ -40,7 +39,7 @@ export const registerUser = async (req: any, res: any) => {
     console.log(`from register err.message`, err.message);
     res.status(404).send({
       success: false,
-      message: "Error in Register User",
+      message: "Error in Register User"
     });
   }
 };
