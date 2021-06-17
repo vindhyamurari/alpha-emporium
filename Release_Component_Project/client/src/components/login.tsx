@@ -84,7 +84,6 @@ export default function Login({}: Props): ReactElement {
         history.goBack();
       })
       .catch(async (error) => {
-
           toast.error("Couldnt Login Try Again", {
             position: "top-right",
             autoClose: 3000,

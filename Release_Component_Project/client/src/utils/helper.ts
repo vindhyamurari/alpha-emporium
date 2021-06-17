@@ -5,7 +5,7 @@ class Toast{
     successToast=(msg:string)=>{
         toast.success(msg, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -17,7 +17,7 @@ class Toast{
     errorToast=(msg:string)=>{
         toast.error(msg, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -29,7 +29,7 @@ class Toast{
     infoToast=(msg:string)=>{
         toast.info(msg, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
